@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+{% include head.html %}
+<body class="d-flex flex-column h-100" cz-shortcut-listen="true">
+<h1 style="display: none">{{ site.title }}</h1>
+<main class="flex-shrink-0">
+    {% include navbar.html %}
+    {{ content }}
+</main>
+{% include footer.html %}
+<script src="{{ site.js_path }}/bootstrap/bootstrap.min.js"></script>
+<script src="{{ site.js_path }}main.js"></script>
+</body>
+</html>
