@@ -1,0 +1,57 @@
+# General
+title: The Awesome Jekyll Template
+email: example_author@email.com
+source: .
+destination: ./public
+baseurl: ""
+url: http://localhost
+srcurl: http://localhost
+lang: pt-BR
+locale: pt_BR
+author: Example Author
+google_analytics: "" # UA-111111111-1
+published: true
+
+# Social Media
+social:
+  name: Example Author
+  links:
+    - https://www.instagram.com/example_author/
+    - https://twitter.com/example_author
+    - https://github.com/example_author
+    - https://www.linkedin.com/in/example_author/
+
+# Site Paths
+post_path: /assets/images/posts/
+icon_path: /assets/icons/
+image_path: /assets/images/
+css_path: /assets/css/
+js_path: /assets/scripts/
+
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-autoprefixer
+  - jekyll-seo-tag
+  - jekyll-sitemap
+sass:
+  sass_dir: assets/css
+  style: compressed
+exclude:
+  - .github
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .gitignore
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - app
+  - .idea
+  - local-server.sh
+  - LICENSE
