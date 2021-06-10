@@ -10,7 +10,6 @@ public/*
 vendor
 .idea
 
-!assets/css/bootstrap/vendor/_rfs.scss
 !*/.gitkeep
 !*/*/.gitkeep
 !*/*/*/.gitkeep
