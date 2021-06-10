@@ -4,8 +4,8 @@ email: example_author@email.com
 source: .
 destination: ./public
 baseurl: ""
-url: https://medeirosinacio.github.io/jekyll-bootstrap-github-pages
-srcurl: https://medeirosinacio.github.io/jekyll-bootstrap-github-pages
+url: jekyll-bootstrap.douglasmedeiros.dev
+srcurl: ""
 lang: pt-BR
 locale: pt_BR
 author: Example Author
