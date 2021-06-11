@@ -1,6 +1,5 @@
 #!/bin/bash
 docker run -ti --rm \
-  -v /mnt:/mnt \
   -v /home/$USER:/home/$USER \
   -w $PWD \
   --dns 8.8.8.8 \
