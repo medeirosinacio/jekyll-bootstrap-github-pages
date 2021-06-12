@@ -11,6 +11,7 @@ locale: pt_BR
 author: Example Author
 google_analytics: "" # UA-111111111-1
 published: true
+staticforms_api_key: b805ad43-5c0a-42f4-bcb7-f08c89da57b3 # jekyll-bootstrap@outlook.com
 
 # Social Media
 social:
@@ -27,7 +28,6 @@ icon_path: /assets/icons/
 image_path: /assets/images/
 css_path: /assets/css/
 js_path: /assets/scripts/
-
 
 # Build settings
 markdown: kramdown
