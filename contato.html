@@ -5,49 +5,39 @@ title: Contato
 
 <script>
 
-    let requests = [];
+    async function handleSubmit(form) {
 
-    function submitForm(form) {
+        const formData = new FormData(form);
 
-        // if (Array.isArray(requests) && requests.length) {
-        //     requests.forEach(function (request) {
-        //         if ((request['responseURL']).includes('gestaoLigacoes.form.php') !== -1) {
-        //             request.abort();
-        //         }
-        //     });
-        // }
+        const formDataObj = Object.fromEntries(formData.entries());
 
-        let formData = new FormData(form);
+        const formDataJson = JSON.stringify(formDataObj);
 
-        let xmlObj = new XMLHttpRequest();
-        requests.push(xmlObj);
-        xmlObj.open("POST", "https://api.staticforms.xyz/submit", true);
-        xmlObj.timeout = 100000;
 
-        xmlObj.onreadystatechange = function () {
-            if (xmlObj.readyState === 4 && xmlObj.status === 200) {
-                console.log(xmlObj.responseText);
+        try {
+            const res = await fetch('https://api.staticforms.xyz/submit', {
+                method: 'POST',
+                body: formDataJson,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json',
+                    'origin': 'https://jekyll-bootstrap.douglasmedeiros.dev'
+                }
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                console.log(json);
             } else {
-                console.log('ERRO');
-                console.log(xmlObj.responseText);
+                console.log(json);
             }
+        } catch (e) {
+            console.log('An error occurred', e);
         }
 
-        xmlObj.onerror = function (event) {
-            console.log(event)
-        }
+        return false;
 
-        xmlObj.ontimeout = function (event) {
-            console.log(event)
-        }
-
-        xmlObj.send(formData)
-    }
-
-    function abortRequests() {
-        requests.forEach(function (request) {
-            request.abort()
-        })
     }
 
 </script>
@@ -77,12 +67,11 @@ title: Contato
                     <!-- To make this form functional, sign up at-->
                     <!-- https://www.staticforms.xyz/-->
                     <!-- to get an API token!-->
-                    <form id="staticform" onsubmit="submitForm(this); return false;">
+                    <form id="staticform" onsubmit="handleSubmit(this); return false;">
 
                         <!-- Replace with your StaticForms accessKey -->
                         <input type="hidden" name="accessKey" value="{{ site.staticforms_api_key }}">
-                        <input type="hidden" name="subject"
-                               value="Test jekyll-bootstrap">
+                        <input type="hidden" name="subject" value="Test jekyll-bootstrap">
 
                         <!-- Replace with the url you want to redirect to -->
                         <input type="hidden" name="redirectTo" value="{{ site.url }}/contato?sucesso">
@@ -96,7 +85,7 @@ title: Contato
                                    placeholder="Seu nome..."
                                    minlength="5"
                                    maxlength="50"
-                                   required>
+                                   required value="Douglas Medeiros">
                             <label for="name">Nome</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
@@ -104,7 +93,7 @@ title: Contato
                         <!-- Email address input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="email" name="email" type="email" required
-                                   placeholder="name@example.com">
+                                   placeholder="name@example.com" value="name@example.com">
                             <label for="email">E-mail</label>
                             <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                             <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
@@ -121,9 +110,10 @@ title: Contato
 
                         <!-- Message input-->
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" name="message" type="text" minlength="10" maxlength="250"
+                            <textarea class="form-control" id="message" name="message" type="text" minlength="10"
+                                      maxlength="250"
                                       required
-                                      placeholder="Entre com sua mensagem aqui..." style="height: 10rem"></textarea>
+                                      placeholder="Entre com sua mensagem aqui..." style="height: 10rem">name@example.com name@example.com</textarea>
                             <label for="message">Mensagem</label>
                             <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
                             </div>
