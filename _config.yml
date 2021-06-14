@@ -4,7 +4,7 @@ email: example_author@email.com
 source: .
 destination: ./public
 baseurl: ""
-url: jekyll-bootstrap.douglasmedeiros.dev
+url: https://jekyll-bootstrap.douglasmedeiros.dev
 srcurl: ""
 lang: pt-BR
 locale: pt_BR
