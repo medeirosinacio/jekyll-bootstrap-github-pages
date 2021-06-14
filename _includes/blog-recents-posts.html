@@ -1,0 +1,54 @@
+{% for post in site.posts limit:3 %}
+<div class="col-lg-4 mb-5">
+    <div class="card h-100 shadow border-0">
+        <img class="card-img-top" src="{{ site.srcurl }}{{ site.image_path }}{{ post.image }}" alt="Blog post image">
+        <div class="card-body p-4">
+            {% for tag in post.tags limit:3 %}
+            <div class="badge bg-primary bg-gradient rounded-pill mb-2">#{{ tag }}&nbsp;</div>
+            {% endfor %}
+            <a class="text-decoration-none link-dark stretched-link" href="{{ site.srcurl }}{{ post.url }}"><h5
+                    class="card-title mb-3">{{ post.title }}</h5></a>
+            <p class="card-text mb-0">
+                {{ post.introduction | strip_html | strip_newlines | truncate: 150 }}
+            </p>
+        </div>
+        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+            <div class="d-flex align-items-end justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img class="rounded-circle me-3" src="{{ site.srcurl }}{{site.image_path}}40x40.png"
+                         alt="Avatar">
+                    <div class="small">
+                        <div class="fw-bold">{{ post.author }}</div>
+                        <div class="text-muted">
+                            {% assign m = post.date | date: "%-m" %}
+                            {{ post.date | date: "%-d" }}
+                            {% case m %}
+                            {% when '1' %}Jan
+                            {% when '2' %}Fev
+                            {% when '3' %}Mar
+                            {% when '4' %}Abr
+                            {% when '5' %}Mai
+                            {% when '6' %}jun
+                            {% when '7' %}Jul
+                            {% when '8' %}Ago
+                            {% when '9' %}Set
+                            {% when '10' %}Out
+                            {% when '11' %}Nov
+                            {% when '12' %}Dez
+                            {% endcase %}
+                            {{ post.date | date: "%Y" }}
+                            ·
+                            {% assign wordCount = post.content | number_of_words | divided_by: 50 %}
+                            {% if wordCount < 1 %}
+                            {{ '1 min para ler' }}
+                            {% else %}
+                            {{ wordCount }}&nbsp;min para ler
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

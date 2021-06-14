@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+<!-- Page Content-->
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center mt-lg-5 mb-4">
+                    <img class="img-fluid rounded-circle" src="{{ site.srcurl }}{{site.image_path}}40x40.png"
+                         alt="Avatar">
+                    <div class="ms-3">
+                        <div class="fw-bold">{{ page.author }}</div>
+                        <div class="text-muted">{{ page.author_title }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">{{ page.title }}</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">
+                            {% assign m = page.date | date: "%-m" %}
+                            {% case m %}
+                            {% when '1' %}Janeiro
+                            {% when '2' %}Fevereiro
+                            {% when '3' %}Março
+                            {% when '4' %}Abril
+                            {% when '5' %}Maio
+                            {% when '6' %}junho
+                            {% when '7' %}Julho
+                            {% when '8' %}Agosto
+                            {% when '9' %}Setembro
+                            {% when '10' %}Outubro
+                            {% when '11' %}Novembro
+                            {% when '12' %}Dezembro
+                            {% endcase %}
+                            {{ page.date | date: "%-d" }},
+                            {{ page.date | date: "%Y" }}
+                            ·
+                            {% assign wordCount = page.content | number_of_words | divided_by: 50 %}
+                            {% if wordCount < 1 %}
+                            {{ '1 min para ler' }}
+                            {% else %}
+                            {{ wordCount }}&nbsp;min para ler
+                            {% endif %}
+                        </div>
+                        <!-- Post categories-->
+                        {% for tag in page.tags %}
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">#{{ tag }} &nbsp</div>
+                        {% endfor %}
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4">
+                        <img class="img-fluid rounded" src="{{ site.srcurl }}{{ site.image_path }}{{ page.image }}"
+                             alt="Post Image"></figure>
+                    <!-- Post content-->
+                    <section class="blog-post-content mb-5">
+                        {{ page.content}}
+                    </section>
+                </article>
+                <!-- Comments section-->
+                <section>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            {% include disqus.html %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

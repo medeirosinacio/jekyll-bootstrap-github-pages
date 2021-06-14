@@ -1,15 +1,16 @@
 ---
-layout: default
+layout: blog-post
 date: 2020-01-02
-permalink: /blog/:categories/blog-post-one
-title: Blog Post One
-categories: category-one
+permalink: /blog/:categories/blog-post-um
+title: Blog Post Um
+categories: categoria-um
 tags:
     - tag1
     - tag2
 image: 600x350.png
-introduction: Some quick example text to build on the card title and make up the bulk of the card's content.
+introduction: Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas. Escritas uma abaixo da outra. Formadas por frases sem nenhum sentido aparente. Apenas frases. Compostas por palavras. Em português, é claro.
 author: Douglas Medeiros
+author_title: Dev
 ---
 
 Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas. Escritas uma abaixo da outra. Formadas por frases sem nenhum sentido aparente. Apenas frases. Compostas por palavras. Em português, é claro. Sou um parágrafo até que bonitinho comparado a outros parágrafos por aí, se é que você me entende. Mas mesmo assim não sou nada demais. Ser um parágrafo não é nada demais. Você me entenderia se fosse um.

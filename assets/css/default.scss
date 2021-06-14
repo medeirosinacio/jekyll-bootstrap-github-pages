@@ -24,19 +24,19 @@ html {
   min-height: 15rem;
 }
 
-.link-hover-blue:hover{
+.link-hover-blue:hover {
   @extend .text-primary;
 }
 
 // button icon load /contato
 .btn-load-img:disabled,
-.btn-load-img[disabled]{
+.btn-load-img[disabled] {
   font-size: 0 !important;
 }
 
 
 .btn-load-img:disabled img,
-.btn-load-img[disabled] img{
+.btn-load-img[disabled] img {
   display: inline-block !important;
 }
 
@@ -76,6 +76,7 @@ html {
     stroke-dashoffset: 0;
   }
 }
+
 @keyframes scale {
   0%, 100% {
     transform: none;
@@ -84,8 +85,15 @@ html {
     transform: scale3d(1.1, 1.1, 1);
   }
 }
+
 @keyframes fill {
   100% {
     box-shadow: inset 0px 0px 0px 30px #5b9918;
   }
+}
+
+// blog-post
+.blog-post-content p {
+  @extend .fs-5;
+  @extend .mb-4;
 }
