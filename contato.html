@@ -5,39 +5,120 @@ title: Contato
 
 <script>
 
+    function maskTel(input) {
+        value = input.value;
+        value = value.substring(0, 15);
+        value = value.replace(/\D/g, "")
+        value = value.replace(/^(\d\d)(\d)/g, "($1) $2")
+        value = value.replace(/(\d{4})(\d)/, "$1-$2")
+        document.getElementById(input.id).value = value;
+    }
+
+    function validateName(name) {
+        return name.length > 5 && name.length < 50;
+    }
+
+    function validateSubject(subject) {
+        return subject.length > 5 && subject.length < 50;
+    }
+
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function validatePhone(phone) {
+        const re = /^\(\d{2}\) \d{4}-\d{4,5}$/gi;
+        return re.test(String(phone).toLowerCase());
+    }
+
+    function validateMessage(message) {
+        return message.length > 10 && message.length < 250;
+    }
+
+    function validateAccessKey(key) {
+        const re = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/gm;
+        return re.test(String(key).toLowerCase());
+    }
+
+    function validValues() {
+
+        if (!validateAccessKey(document.getElementById('accessKey').value)) {
+            console.log('Chave inválida.')
+            return false;
+        }
+
+        if (!validateSubject(document.getElementById('subject').value)) {
+            console.log('Assunto inválido.')
+            return false;
+        }
+
+        if (!validateName(document.getElementById('name').value)) {
+            console.log('O nome deve ter entre 5 e 50 caracteres.')
+            return false;
+        }
+
+        if (!validateEmail(document.getElementById('email').value)) {
+            console.log('Email inválido.')
+            return false;
+        }
+
+        if (!validatePhone(document.getElementById('phone').value)) {
+            console.log('Telefone inválido.')
+            return false;
+        }
+
+        if (!validateMessage(document.getElementById('message').value)) {
+            const errorElement = document.getElementById('submitErrorMessage');
+            errorElement.innerHTML = 'A mensagem deve ter entre 10 e 250 caracteres.';
+            return false;
+        }
+
+        return true;
+    }
+
     async function handleSubmit(form) {
 
-        const formData = new FormData(form);
+        const errorElement = document.getElementById('submitErrorBox');
+        errorElement.classList.add("d-none");
+        document.getElementById("submitFormBtn").setAttribute("disabled", 'true');
 
-        const formDataObj = Object.fromEntries(formData.entries());
+        const formDataObj = Object.fromEntries(new FormData(form).entries());
 
-        const formDataJson = JSON.stringify(formDataObj);
-
+        if (!validValues()) {
+            errorElement.classList.remove("d-none");
+            document.getElementById("submitFormBtn").removeAttribute("disabled");
+            return false;
+        }
 
         try {
             const res = await fetch('https://api.staticforms.xyz/submit', {
                 method: 'POST',
-                body: formDataJson,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'application/json',
-                    'origin': 'https://jekyll-bootstrap.douglasmedeiros.dev'
-                }
+                body: JSON.stringify(formDataObj),
+                headers: {'Content-Type': 'application/json'}
             });
 
             const json = await res.json();
 
             if (json.success) {
-                console.log(json);
+
+                setTimeout(function () {
+                    document.getElementById("modal").click();
+                    document.getElementById("submitFormBtn").removeAttribute("disabled");
+                }, 3000);
+
             } else {
                 console.log(json);
+                const errorElement = document.getElementById('submitErrorMessage');
+                errorElement.innerHTML = 'Ocorreu um erro no envio do formulário, atualize a página para tentar novamente ou volte mais tarde.';
+                document.getElementById("submitFormBtn").removeAttribute("disabled");
             }
         } catch (e) {
             console.log('An error occurred', e);
+            const errorElement = document.getElementById('submitErrorMessage');
+            errorElement.innerHTML = 'Ocorreu um erro no envio do formulário, atualize a página para tentar novamente ou volte mais tarde.';
+            document.getElementById("submitFormBtn").removeAttribute("disabled");
         }
-
-        return false;
-
     }
 
 </script>
@@ -51,8 +132,8 @@ title: Contato
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                     <i class="bi bi-envelope"></i>
                 </div>
-                <h1 class="fw-bolder">Formulario de contato</h1>
-                <p class="lead fw-normal text-muted mb-0">Esse é um formulario funcional gerado
+                <h1 class="fw-bolder">Formulário de contato</h1>
+                <p class="lead fw-normal text-muted mb-0">Esse é um formulário funcional gerado
                     com <a href="https://www.staticforms.xyz" class="link-primary text-decoration-none" target="_blank">
                         staticforms.xyz</a>!
                 </p>
@@ -70,11 +151,12 @@ title: Contato
                     <form id="staticform" onsubmit="handleSubmit(this); return false;">
 
                         <!-- Replace with your StaticForms accessKey -->
-                        <input type="hidden" name="accessKey" value="{{ site.staticforms_api_key }}">
-                        <input type="hidden" name="subject" value="Test jekyll-bootstrap">
+                        <input type="hidden" id="accessKey" name="accessKey" value="{{ site.staticforms_api_key }}">
 
-                        <!-- Replace with the url you want to redirect to -->
-                        <input type="hidden" name="redirectTo" value="{{ site.url }}/contato?sucesso">
+                        <!-- If we receive data in this field submission will be ignored -->
+                        <input type="text" name="honeypot" style="display: none;" value="only test">
+
+                        <input type="hidden" id="subject" name="subject" value="Test jekyll-bootstrap">
 
                         <!-- Name input-->
                         <div class="form-floating mb-3">
@@ -84,95 +166,131 @@ title: Contato
                                    type="text"
                                    placeholder="Seu nome..."
                                    minlength="5"
-                                   maxlength="50"
-                                   required value="Douglas Medeiros">
+                                   maxlength="50" required>
                             <label for="name">Nome</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Email address input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="email" name="email" type="email" required
-                                   placeholder="name@example.com" value="name@example.com">
+                                   placeholder="name@example.com">
                             <label for="email">E-mail</label>
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <!-- Phone number input-->
-                        <!--                        <div class="form-floating mb-3">-->
-                        <!--                            <input class="form-control" id="phone" name="phone" type="tel" placeholder="(123) 456-7890">-->
-                        <!--                            <label for="phone">Phone number</label>-->
-                        <!--                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is-->
-                        <!--                                required.-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   type="tel"
+                                   placeholder="(51) 3456-7890"
+                                   maxlength="15"
+                                   minlength="14"
+                                   onchange="maskTel(this)"
+                                   onkeyup="maskTel(this)"
+                                   onkeypress="maskTel(this)"
+                                   onautocomplete="maskTel(this)"
+                                   required>
+                            <label for="phone">Telefone</label>
+                            <div class="invalid-feedback"></div>
+                        </div>
 
                         <!-- Message input-->
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" name="message" type="text" minlength="10"
+                            <textarea class="form-control"
+                                      id="message"
+                                      name="message"
+                                      type="text"
+                                      minlength="10"
                                       maxlength="250"
                                       required
-                                      placeholder="Entre com sua mensagem aqui..." style="height: 10rem">name@example.com name@example.com</textarea>
+                                      placeholder="Entre com sua mensagem aqui..." style="height: 10rem"></textarea>
                             <label for="message">Mensagem</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
-                            </div>
+                            <div class="invalid-feedback"></div>
                         </div>
 
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br>
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
+                        <div class="alert alert-danger d-none" id="submitErrorBox" role="alert">
+                            <div class="text-center text-danger" id="submitErrorMessage"></div>
                         </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage">
-                            <div class="text-center text-danger mb-3">Error sending message!</div>
-                        </div>
+
                         <!-- Submit Button-->
                         <div class="d-grid">
-                            <button class="btn btn-primary btn-lg" type="submit">
+                            <button class="btn btn-primary btn-lg btn-load-img" type="submit" id="submitFormBtn">
+                                <img src="{{site.srcurl}}/assets/gifs/load_white.gif" class="d-none" height="28">
                                 Enviar
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
+
         <!-- Contact cards-->
         <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
             <div class="col">
-                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-chat-dots"></i>
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                    <i class="bi bi-chat-dots"></i>
                 </div>
-                <div class="h5 mb-2">Chat with us</div>
-                <p class="text-muted mb-0">Chat live with one of our support specialists.</p>
+                <div class="h5 mb-2">Icone 1</div>
+                <p class="text-muted mb-0">
+                    Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas.
+                </p>
             </div>
             <div class="col">
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-people"></i></div>
-                <div class="h5">Ask the community</div>
-                <p class="text-muted mb-0">Explore our community forums and communicate with other users.</p>
+                <div class="h5">Icone 2</div>
+                <p class="text-muted mb-0">
+                    Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas.
+                </p>
             </div>
             <div class="col">
-                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
-                        class="bi bi-question-circle"></i></div>
-                <div class="h5">Support center</div>
-                <p class="text-muted mb-0">Browse FAQ's and support articles to find solutions.</p>
-            </div>
-            <div class="col">
-                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-telephone"></i>
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                    <i class="bi bi-question-circle"></i>
                 </div>
-                <div class="h5">Call us</div>
-                <p class="text-muted mb-0">Call us during normal business hours at (555) 892-9403.</p>
+                <div class="h5">Icone 3</div>
+                <p class="text-muted mb-0">
+                    Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas.
+                </p>
+            </div>
+            <div class="col">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                    <i class="bi bi-telephone"></i>
+                </div>
+                <div class="h5">Icone 4</div>
+                <p class="text-muted mb-0">
+                    Eu sou um parágrafo. Não sou nada de mais, apenas linhas. Várias e várias delas.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+
+    <!-- Button trigger modal -->
+    <input type="hidden" id="modal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#successModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Obrigado!</h5>
+                <a class="btn-close" href="{{site.srcurl}}/contato" title="Close"></a>
+            </div>
+            <div class="modal-body text-center mb-3">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <p class="lead py-3 px-2">Formulário de contato enviado com sucesso. Obrigado, entraremos em contato com
+                    você em
+                    breve! Este é um exemplo de mensagem.</p>
+                <a class="btn btn-primary" href="{{site.srcurl}}/" title="Voltar a home">Voltar a home!</a>
+            </div>
+        </div>
+    </div>
+</div>
