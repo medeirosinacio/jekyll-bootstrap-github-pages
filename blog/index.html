@@ -1,0 +1,133 @@
+---
+layout: default
+title: Blog
+---
+
+<!-- Page Content-->
+<section class="py-5">
+    <div class="container px-5">
+        <div class="row">
+            <div class="col-md-5">
+                <h1 class="fw-bolder fs-5 mb-4">Blog</h1>
+            </div>
+            <div class="col-7 d-none d-md-block">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        {% if paginator.previous_page %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ site.srcurl }}{{ paginator.previous_page_path }}"
+                               tabindex="-1"
+                               aria-disabled="true">Anterior</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        {% endif %}
+                        {% for page in (1..paginator.total_pages) %}
+                        {% if page == paginator.page %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{{ site.srcurl }}{{ site.paginate_path | relative_url | replace: ':num', page }}">
+                                {{ page }}
+                            </a>
+                        </li>
+                        {% elsif page == 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{site.srcurl}}/blog">1</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{{ site.srcurl }}{{ site.paginate_path | relative_url | replace: ':num', page }}">
+                                {{ page }}
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if paginator.next_page %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ site.srcurl }}{{ paginator.next_page_path }}">Proxima</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Proxima</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% for post in paginator.posts %}
+        <div class="card border-0 shadow rounded-3 overflow-hidden mb-4">
+            <div class="card-body p-0 link-hover-blue">
+                <div class="row gx-0">
+                    <div class="col-lg-6 col-xl-5 py-lg-5">
+                        <div class="p-4 p-md-5">
+                            {% for tag in post.tags limit:3 %}
+                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">#{{ tag }} &nbsp</div>
+                            {% endfor %}
+                            <a class="text-decoration-none link-dark stretched-link h2 fw-bolder"
+                               href="{{ site.srcurl }}{{ post.url }}"><h3
+                                    class="card-title mb-3">{{ post.title }}</h3></a>
+                            <p> {{ post.introduction | strip_html | strip_newlines | truncate: 150 }}</p>
+                            <a class="stretched-link text-decoration-none" href="{{ site.srcurl }}{{ post.url }}">
+                                Ler mais
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="bg-featured-blog"
+                             style="background-image: url('{{ site.srcurl }}{{ site.image_path }}{{ post.image }}')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <nav aria-label="Page navigation" class="py-5">
+        <ul class="pagination justify-content-center">
+            {% if paginator.previous_page %}
+            <li class="page-item">
+                <a class="page-link" href="{{ site.srcurl }}{{ paginator.previous_page_path }}" tabindex="-1"
+                   aria-disabled="true">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+            {% endif %}
+            {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+            <li class="page-item active">
+                <a class="page-link"
+                   href="{{ site.srcurl }}{{ site.paginate_path | relative_url | replace: ':num', page }}">
+                    {{ page }}
+                </a>
+            </li>
+            {% elsif page == 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{site.srcurl}}/blog">1</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link"
+                   href="{{ site.srcurl }}{{ site.paginate_path | relative_url | replace: ':num', page }}">
+                    {{ page }}
+                </a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if paginator.next_page %}
+            <li class="page-item">
+                <a class="page-link" href="{{ site.srcurl }}{{ paginator.next_page_path }}">Proxima</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Proxima</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</section>

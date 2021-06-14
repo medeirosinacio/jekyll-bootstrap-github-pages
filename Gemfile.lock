@@ -34,6 +34,7 @@ GEM
       autoprefixer-rails (~> 9.3)
     jekyll-feed (0.15.1)
       jekyll (>= 3.7, < 5.0)
+    jekyll-paginate (1.1.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
     jekyll-seo-tag (2.7.1)
@@ -75,6 +76,7 @@ DEPENDENCIES
   jekyll (= 3.8)
   jekyll-autoprefixer
   jekyll-feed
+  jekyll-paginate
   jekyll-seo-tag
   jekyll-sitemap
   minima (~> 2.5)

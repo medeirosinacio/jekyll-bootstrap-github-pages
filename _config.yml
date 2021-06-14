@@ -13,6 +13,10 @@ google_analytics: "" # UA-111111111-1
 published: true
 staticforms_api_key: b805ad43-5c0a-42f4-bcb7-f08c89da57b3 # jekyll-bootstrap@outlook.com
 
+# Paginator configuration
+paginate: 3
+paginate_path: "/blog/pagina/:num"
+
 # Social Media
 social:
   name: Example Author
@@ -37,6 +41,7 @@ plugins:
   - jekyll-autoprefixer
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
 sass:
   sass_dir: assets/css
   style: compressed
