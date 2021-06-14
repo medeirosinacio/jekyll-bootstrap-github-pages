@@ -28,6 +28,19 @@ html {
   @extend .text-primary;
 }
 
+// navibar
+@media (max-width: 500px) {
+  .navbar-brand {
+    margin-right: 0;
+  }
+  .navbar-toggler{
+    padding: 0;
+    font-size: 1rem;
+    border: none;
+  }
+}
+
+
 // button icon load /contato
 .btn-load-img:disabled,
 .btn-load-img[disabled] {
