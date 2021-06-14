@@ -20,7 +20,9 @@
                         + Exemplos de Páginas
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}/blog-article">Artigo do Blog</a></li>
+                        {% for post in site.posts limit:1 %}
+                        <li><a class="dropdown-item" href="{{ site.srcurl }}{{ post.url }}">Artigo do Blog</a></li>
+                        {% endfor %}
                         <li><a class="dropdown-item" href="{{ site.srcurl }}/404">404</a></li>
                         <li><a class="dropdown-item" href="{{ site.srcurl }}/sobre">Sobre</a></li>
                         <li><a class="dropdown-item" href="{{ site.srcurl }}/contato">Contato</a></li>
