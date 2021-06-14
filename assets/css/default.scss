@@ -4,6 +4,13 @@ html {
   height: 100%;
 }
 
+// reset text
+.text-inherit {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
 // Custom SCSS for feature component with Bootstrap icon
 .feature {
   display: inline-flex;
@@ -33,7 +40,7 @@ html {
   .navbar-brand {
     margin-right: 0;
   }
-  .navbar-toggler{
+  .navbar-toggler {
     padding: 0;
     font-size: 1rem;
     border: none;

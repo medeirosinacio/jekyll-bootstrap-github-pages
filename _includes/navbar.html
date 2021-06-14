@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <h2 class="d-none">Menu</h2>
     <div class="container px-sm-5">
         <a class="navbar-brand" href="/">
             <img src="{{ site.srcurl }}{{ site.image_path }}logo/logo.svg" alt="" width="30" height="25"
@@ -13,8 +12,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="{{ site.srcurl }}/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ site.srcurl }}/blog">Blog</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ site.srcurl }}/">
+                        <h2 class="text-inherit">Home</h2>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ site.srcurl }}/blog">
+                        <h2 class="text-inherit">Blog</h2>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -22,12 +29,28 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                         {% for post in site.posts limit:1 %}
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}{{ post.url }}">Artigo do Blog</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ site.srcurl }}{{ post.url }}">
+                                <h2 class="text-inherit">Artigo do Blog</h2>
+                            </a>
+                        </li>
                         {% endfor %}
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}/404">404</a></li>
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}/sobre">Sobre</a></li>
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}/contato">Contato</a></li>
-                        <li><a class="dropdown-item" href="{{ site.srcurl }}/faq">FAQ</a></li>
+                        <li><a class="dropdown-item" href="{{ site.srcurl }}/404">
+                            <h2 class="text-inherit">404</h2>
+                        </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ site.srcurl }}/sobre">
+                            <h2 class="text-inherit">Sobre</h2>
+                        </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ site.srcurl }}/contato">
+                            <h2 class="text-inherit">Contato</h2>
+                        </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ site.srcurl }}/faq">
+                            <h2 class="text-inherit">FAQ</h2>
+                        </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
