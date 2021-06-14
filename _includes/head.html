@@ -2,6 +2,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="index, follow"/>
     <meta charset="utf-8">
+    {%if paginator and paginator.page != 1 %} <title> {{ page.title }} - Pagína {{ paginator.page }} | {{ site.title }} </title>{% endif %}
     {% seo %}
     <link rel="stylesheet" href="{{ site.srcurl }}{{ site.css_path }}main.css">
     <link rel="icon" type="image/x-icon" href="{{ site.srcurl }}/favicon.ico">
