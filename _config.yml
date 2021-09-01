@@ -63,5 +63,5 @@ exclude:
   - vendor/ruby/
   - app
   - .idea
-  - local-server.sh
+  - server.sh
   - LICENSE
