@@ -1,7 +1,7 @@
 #!/bin/bash
 docker run -ti --rm \
-  -v /home/$USER:/home/$USER \
-  -w $PWD \
+  -v $PWD:/app \
+  -w /app \
   --dns 8.8.8.8 \
   -p 80:4000 \
   -p 4000:4000 \
