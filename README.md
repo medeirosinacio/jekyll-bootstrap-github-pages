@@ -1,4 +1,5 @@
 # The Awesome Jekyll Template
+
 ###### Um template Jekyll completo com Bootstrap para Github Pages!
 
 ---
@@ -28,19 +29,28 @@ Configuração prontas que você vai encontrar nesse template:
 Esse template já totalmente configurado, basta fazer o clone dele na sua maquina e executar o script para subir o servidor. Por padrão o servidor ira subir nas portas 80/4000/35729, sinta-se a vontade para mudar diretamente no script.
 
 ### Pré-requisitos
- - Git
- - Docker
+
+- Git
+- Docker
 
 ### Instalação
 
-1. Clone o repositorio
+1 -  Clone o repositorio
+
 ```sh
 git clone https://github.com/medeirosinacio/jekyll-bootstrap-github-pages.git
 ```
-2. Execute o script bash para subir o servidor local
+
+2 -  Execute o script bash para subir o servidor local
+
 ```sh
 ./server.sh
 ```
 
+3 - O servidor estara disponivel em seu ambiente local
+
+> [http://localhost/index.html](http://localhost/index.html)
+
 ## Licença
+
 Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
