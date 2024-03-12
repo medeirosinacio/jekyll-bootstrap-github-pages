@@ -32,7 +32,7 @@ html {
 }
 
 .link-hover-blue:hover {
-  @extend .text-primary;
+  @extend .text-primary !optional;
 }
 
 // navibar
@@ -114,6 +114,6 @@ html {
 
 // blog-post
 .blog-post-content p {
-  @extend .fs-5;
-  @extend .mb-4;
+  @extend .fs-5 !optional;
+  @extend .mb-4 !optional;
 }

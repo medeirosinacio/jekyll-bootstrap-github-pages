@@ -14,7 +14,7 @@ Desenvolva sites completos e dinâmicos, totalmente estáticos mesmo tendo conta
 Configuração prontas que você vai encontrar nesse template:
 
 - [Jekyll](https://jekyllrb.com/) com sua versão compatível com o Github Pages;
-- [Bootstrap v5.0](https://getbootstrap.com/docs/5.0/getting-started/introduction/) com compilador [Sass](https://getbootstrap.com/docs/5.0/getting-started/build-tools/#sass);
+- [Bootstrap v5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/) com compilador [Sass](https://getbootstrap.com/docs/5.1/getting-started/build-tools/#sass);
 - [Jekyll Minifier](https://github.com/Mendeo/jekyll-minifier) para compilação de HTML, CSS e JS;
 - Efeitos de uma Landing Page com [AOS library](https://michalsnik.github.io/aos/)
 - Configurações [globais](./_config.yml) de variáveis, diretórios e arquivos;

@@ -6,8 +6,10 @@
             {% for tag in post.tags limit:3 %}
             <div class="badge bg-primary bg-gradient rounded-pill mb-2">#{{ tag }}&nbsp;</div>
             {% endfor %}
-            <a class="text-decoration-none link-dark stretched-link" href="{{ site.srcurl }}{{ post.url }}"><h5
-                    class="card-title mb-3">{{ post.title }}</h5></a>
+            <br>
+            <a class="text-decoration-none link-dark stretched-link" href="{{ site.srcurl }}{{ post.url }}">
+                <h5 class="card-title mb-3">{{ post.title }}</h5>
+            </a>
             <p class="card-text mb-0">
                 {{ post.introduction | strip_html | strip_newlines | truncate: 150 }}
             </p>
@@ -23,7 +25,7 @@
                             {% assign m = post.date | date: "%-m" %}
                             {{ post.date | date: "%-d" }}
                             {% case m %}
-                            {% when '1' %}Jan
+                            {% when '1' %} Jan
                             {% when '2' %}Fev
                             {% when '3' %}Mar
                             {% when '4' %}Abr
