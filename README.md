@@ -1,56 +1,76 @@
 # The Awesome Jekyll Template
 
-###### Um template Jekyll completo com Bootstrap para Github Pages!
+A complete, production-ready Jekyll template with Bootstrap, designed for fast and easy deployment on GitHub Pages.
+
+[Live Demo](https://jekyll-bootstrap.douglasmedeiros.dev/)
 
 ---
 
-Este é um template completo para geração de sites estáticos, desenvolvendo paginas dinamicamente com [Jekyll](https://jekyllrb.com/). 
-Desenvolva sites completos e dinâmicos, totalmente estáticos mesmo tendo contagem de visualizações, comentários ou posts.
+## Features
 
-[Demostração](https://jekyll-bootstrap.douglasmedeiros.dev/)
+- **Jekyll**: Static site generator, fully compatible with GitHub Pages.
+- **Bootstrap 5.3**: Responsive design with Sass support and [icons](https://github.com/twbs/icons).
+- **HTML/CSS/JS Minification**: Optimized builds using [Jekyll Minifier](https://github.com/Mendeo/jekyll-minifier).
+- **Landing Page Effects**: Integrated [AOS library](https://michalsnik.github.io/aos/) for animations.
+- **Dynamic Blog**: Pagination, tags, and categories out of the box.
+- **View Counter**: Integrated with [CountAPI](https://countapi.xyz/).
+- **Comments**: Powered by [Disqus](https://disqus.com/).
+- **Contact Form**: Email responses via [Static Forms](https://www.staticforms.xyz/).
+- **Docker Support**: Easy local development with Docker.
+- **Ready-to-use Configuration**: Global variables, directories, and assets pre-configured.
 
-## Recursos
+## Getting Started
 
-Configuração prontas que você vai encontrar nesse template:
+### Prerequisites
 
-- [Jekyll](https://jekyllrb.com/) com sua versão compatível com o Github Pages;
-- [Bootstrap v5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/) com compilador [Sass](https://getbootstrap.com/docs/5.1/getting-started/build-tools/#sass);
-- [Jekyll Minifier](https://github.com/Mendeo/jekyll-minifier) para compilação de HTML, CSS e JS;
-- Efeitos de uma Landing Page com [AOS library](https://michalsnik.github.io/aos/)
-- Configurações [globais](./_config.yml) de variáveis, diretórios e arquivos;
-- Um [bashscript](./server.sh) para subir localmente seu projeto via Docker;
-- Blog com paginação dinâmica, tags e categorias;
-- Contagem de visualizações/curtidas com [CountAPI](https://countapi.xyz/);
-- Sistema de comentários com [Disqus](https://disqus.com/);
-- Formulario de contato com resposta via email com [Static Forms](https://www.staticforms.xyz/);
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
+- [GNU Make](https://www.gnu.org/software/make/) (available by default on most Unix systems)
 
-## Começando
+### Installation
 
-Esse template já totalmente configurado, basta fazer o clone dele na sua maquina e executar o script para subir o servidor. Por padrão o servidor ira subir nas portas 80/4000/35729, sinta-se a vontade para mudar diretamente no script.
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/medeirosinacio/jekyll-bootstrap-github-pages.git
+    cd jekyll-bootstrap-github-pages
+    ```
 
-### Pré-requisitos
+2. **Start the local server:**
+    ```sh
+    make setup
+    ```
+   The server will be available at [http://localhost:4000](http://localhost:4000).
 
-- Git
-- Docker
+> **Note:** The `make setup` command automatically detects your system architecture (x86 or ARM) and runs the appropriate Docker environment.
 
-### Instalação
+### Makefile Commands
 
-1 -  Clone o repositorio
+- `make setup` &mdash; Sets up and runs the project in a Docker container. Detects your CPU architecture and uses the correct image.
+- `make help` &mdash; Shows all available make commands and their descriptions.
 
-```sh
-git clone https://github.com/medeirosinacio/jekyll-bootstrap-github-pages.git
-```
+### Dependencies
 
-2 -  Execute o script bash para subir o servidor local
+All runtime dependencies are managed inside the Docker container. You only need to have Docker and Make installed on your machine. The container will handle:
 
-```sh
-./server.sh
-```
+- Ruby and Bundler (for Jekyll)
+- Node.js (for asset compilation)
+- All required Ruby gems (see `Gemfile`)
 
-3 - O servidor estara disponivel em seu ambiente local
+## Usage
 
-> [http://localhost/index.html](http://localhost/index.html)
+- Edit `_config.yml` to update site settings, URLs, and metadata.
+- Add your posts in the `_posts` directory.
+- Customize styles in `assets/css/`.
+- All static assets are located in the `assets/` folder.
 
-## Licença
+## Contributing
 
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+**Made with ❤️ by [Douglas Medeiros](https://github.com/medeirosinacio)**
