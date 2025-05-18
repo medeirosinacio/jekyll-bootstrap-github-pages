@@ -16,3 +16,4 @@ vendor
 !*/*/*/*/.gitkeep
 !*/*/*/*/*/.gitkeep
 !*/*/*/*/*/*/.gitkeep
+/.gem-cache/
