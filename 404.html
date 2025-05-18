@@ -1,7 +1,16 @@
 ---
+layout: blank
+title: 404 Not Found
 layout: default
 title: 404
 ---
+<script>
+    // Redirect if URL ends with a trailing slash
+    if (window.location.pathname.endsWith('/') && window.location.pathname !== '/') {
+        const newPath = window.location.pathname.slice(0, -1) + window.location.search + window.location.hash;
+        window.location.replace(newPath);
+    }
+</script>
 <style>
 
     /*[404 error page]
